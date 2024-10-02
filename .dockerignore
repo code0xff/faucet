@@ -1,0 +1,6 @@
+.github
+.env
+/node_modules
+/build
+/client
+/data
