@@ -41,7 +41,7 @@ export const networkApi: NetworkApi = {
     const toAddress = convertAddress(address);
     logger.info(`Requested converted address: ${toAddress}`);
 
-    return (await client.tx.babel.transfer(toAddress, dripAmount).signAndSend(signer, { nonce })).toString();
+    return (await client.tx.babel.transfer(null, toAddress, dripAmount).signAndSend(signer, { nonce })).toString();
   },
 
   getBalance: async (address: string, client: ApiPromise): Promise<bigint> => {
