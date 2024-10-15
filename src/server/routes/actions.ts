@@ -50,7 +50,7 @@ router.post<unknown, DripResponse, PartialDrip<FaucetRequestType>>("/drip/web", 
   if (!recaptcha) {
     return missingParameterError(res, "recaptcha");
   }
-  if (!asset_id) {
+  if (asset_id === null || asset_id === undefined) {
     return missingParameterError(res, "asset_id");
   }
   try {

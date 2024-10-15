@@ -1,4 +1,5 @@
 import { config } from "#src/config";
+import { NATIVE_ASSET_ID } from "#src/contants/constants";
 import { logger } from "#src/logger";
 import { getClient, getNetworkData } from "#src/papi/index";
 import { getSigner } from "#src/papi/signer";
@@ -72,7 +73,7 @@ export class PolkadotActions {
   public async getFaucetBalance(assetId: number): Promise<bigint> {
     const client = await getClient();
 
-    if (assetId === -1) {
+    if (assetId === NATIVE_ASSET_ID) {
       return await networkData.api.getBalance(this.address, client);
     } else {
       return await networkData.api.getAsset(this.address, assetId, client);
@@ -82,7 +83,7 @@ export class PolkadotActions {
   public async getAccountBalance(address: string, assetId: number): Promise<number> {
     const client = await getClient();
 
-    if (assetId === -1) {
+    if (assetId === NATIVE_ASSET_ID) {
       const balance = await networkData.api.getBalance(address, client);
       return Number(balance / 10n ** BigInt(networkData.data.decimals));
     } else {
@@ -135,7 +136,7 @@ export class PolkadotActions {
     try {
       dripTimeout = rpcTimeout("drip");
       const client = await getClient();
-      if (assetId === -1) {
+      if (assetId === NATIVE_ASSET_ID) {
         const balance = await networkData.api.getBalance(this.address, client);
         if (balance < amount) {
           throw new Error("Faucet is turned off");
